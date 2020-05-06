@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.hm.access.dao.UserInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.hand.hm.access.bean.UserInfo">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="phone" property="phone"/>
+        <result column="is_share" property="isShare"/>
+        <result column="is_join_by_share" property="isJoinByShare"/>
+        <result column="signed_in_days" property="signedInDays"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+                id,
+                user_id,
+                user_name,
+                phone,
+                is_share,
+                is_join_by_share,
+                signed_in_days
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" parameterType="com.hand.hm.access.bean.UserInfo">
+        INSERT INTO user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test='null != id'>
+                id,
+            </if>
+            <if test='null != userId'>
+                user_id,
+            </if>
+            <if test='null != userName'>
+                user_name,
+            </if>
+            <if test='null != phone'>
+                phone,
+            </if>
+            <if test='null != isShare'>
+                is_share,
+            </if>
+            <if test='null != isJoinByShare'>
+                is_join_by_share,
+            </if>
+            <if test='null != signedInDays'>
+                signed_in_days
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test='null != id'>
+                #{id},
+            </if>
+            <if test='null != userId'>
+                #{userId},
+            </if>
+            <if test='null != userName'>
+                #{userName},
+            </if>
+            <if test='null != phone'>
+                #{phone},
+            </if>
+            <if test='null != isShare'>
+                #{isShare},
+            </if>
+            <if test='null != isJoinByShare'>
+                #{isJoinByShare},
+            </if>
+            <if test='null != signedInDays'>
+                #{signedInDays}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM user_info
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.hand.hm.access.bean.UserInfo">
+        UPDATE user_info
+        <set>
+            <if test='null != userId'>user_id = #{userId},</if>
+            <if test='null != userName'>user_name = #{userName},</if>
+            <if test='null != phone'>phone = #{phone},</if>
+            <if test='null != isShare'>is_share = #{isShare},</if>
+            <if test='null != isJoinByShare'>is_join_by_share = #{isJoinByShare},</if>
+            <if test='null != signedInDays'>signed_in_days = #{signedInDays}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_info
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_info
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM user_info
+    </select>
+
+
+    <!-- 自定义开始 -->
+
+    <select id="getUserInfoByOpenId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_info
+        WHERE user_id = #{openId}
+    </select>
+</mapper>

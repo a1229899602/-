@@ -1,0 +1,44 @@
+server:
+  port: 8099
+  context-path: /demo/
+
+spring:
+      profiles:
+        active: dev
+      redis:
+          host: 47.97.152.96
+          port: 6379
+          database: 5
+          password: 123456789
+
+info:
+    status: ok
+
+springfox:
+    documentation:
+        swagger:
+            v2:
+                path: /swagger.json
+#mybatis:
+#  type-aliases-package: com.hand.*.access.vo
+#  mapper-locations: classpath*:com/hand/*/access/dao/*Dao.xml
+
+fuwu.sourceID: gh_ac71108ea479
+fuwu.AppID: wxaa8ab96167db8b6c
+fuwu.AppSecret: 25aab025d5de21a7687d4978dbb8be04
+fuwu.partner: 1489494052
+fuwu.partnerKey: 25aab025d5de21a7687d4978dbb8be04
+fuwu.oauth.notifyUrl: /app/we-chat/snsUnionId
+
+litemall:
+  # 开发者应该设置成自己的wx相关信息
+  wx:
+    app-id: wx7964d5490fac5853
+    app-secret: 25aab025d5de21a7687d4978dbb8be04
+    mch-id: 1489494052
+    mch-key: 5e20clk2qfzpobm3ziuycu3kufimhjkz
+    notify-url: /app/we-chat/snsUnionId
+    # 商户证书文件路径
+    # 请参考“商户证书”一节 https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3
+    key-path: /usr/local/apiclientcert/apiclient_cert.p12
+    #key-path: D://apiclient_cert.p12
